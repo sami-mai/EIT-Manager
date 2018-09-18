@@ -25,27 +25,30 @@ Template.body.events({
 
     // Get value from form element
     const target = event.target;
-    const firstname = target.fname.value
-    const lastname = target.lname.value
+    const firstname = target.firstname.value
+    const lastname = target.lastname.value
     const gender = target.gender.value
-    const dateOfBirth = target.date.value
+    const dateOfBirth = target.dateOfBirth.value
+
+    // Insert a task into the collection
+    Meteor.call("eits.insert", firstname, lastname, gender, dateOfBirth);
 
     // Insert a eit into the collection
-    EITs.insert({
-      firstname,
-      lastname,
-      gender,
-      dateOfBirth,
-      createdAt: new Date(), // current time
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-
-    });
+    // EITs.insert({
+    //   firstname,
+    //   lastname,
+    //   gender,
+    //   dateOfBirth,
+    //   createdAt: new Date(), // current time
+    //   owner: Meteor.userId(),
+    //   username: Meteor.user().username,
+    //
+    // });
     // Clear form
-    target.fname.value = '';
-    target.lname.value = '';
+    target.firstname.value = '';
+    target.lastname.value = '';
     target.gender.value = '';
-    target.date.value = '';
+    target.dateOfBirth.value = '';
 
   },
 });
