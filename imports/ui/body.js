@@ -1,7 +1,12 @@
 import {
+  Meteor
+} from 'meteor/meteor';
+import {
   Template
 } from 'meteor/templating';
-
+import {
+  ReactiveDict
+} from 'meteor/reactive-dict';
 import {
   EITs
 } from '../api/eits.js';
@@ -10,12 +15,9 @@ import './body.html';
 import './templates/eit_list.js'
 import './templates/eit.js'
 
-// Template.body.helpers({
-//
-//   eits() {
-//     return EITs.find({});
-//   },
-// });
+Template.body.onCreated(function bodyOnCreated() {
+  this.state = new ReactiveDict();
+});
 
 Template.body.events({
   'submit .new-eit' (event) {
@@ -34,6 +36,10 @@ Template.body.events({
       lastname,
       gender,
       dateOfBirth,
+      createdAt: new Date(), // current time
+      owner: Meteor.userId(),
+      username: Meteor.user().username,
+
     });
     // Clear form
     target.fname.value = '';

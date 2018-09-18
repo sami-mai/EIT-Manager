@@ -2,10 +2,11 @@
   <div class="container">
     <header>
       <h1>MEST EIT Manager</h1>
+      <br> {{> loginButtons}}
     </header>
-    <br>
+    <br> {{#if currentUser}}
     <div class="container">
-
+      <h3><strong>{{username}}</strong></h3>
       <form class="new-eit" id="eitForm">
         <div class="">
           <h3>New EIT</h3>
@@ -31,16 +32,24 @@
       </form>
 
     </div>
+
     <br>
     <hr><br>
+    <div class="hide-eitList">
+
+      <button type="submit">EIT list</button>
+
+    </div>
+    {{> loginButtons}}
+    <br>
     <!-- Eit Data Table  -->
     <table class="table">
       <!-- Table Headings -->
       <tr>
         <th></th>
         <!-- <th># Number</th> -->
-        <th>Firstname</th>
-        <th>Lastname</th>
+        <th>First Name</th>
+        <th>Last Name</th>
         <th>Gender</th>
         <th>D.O.B</th>
       </tr>
@@ -48,5 +57,6 @@
 
       {{> eitList}}
     </table>
+    {{/if}}
   </div>
 </body>
