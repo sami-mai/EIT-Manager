@@ -17,6 +17,7 @@ import './templates/eit.js'
 
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
+  Meteor.subscribe("eits");
 });
 
 Template.body.events({
@@ -33,22 +34,18 @@ Template.body.events({
     // Insert a task into the collection
     Meteor.call("eits.insert", firstname, lastname, gender, dateOfBirth);
 
-    // Insert a eit into the collection
-    // EITs.insert({
-    //   firstname,
-    //   lastname,
-    //   gender,
-    //   dateOfBirth,
-    //   createdAt: new Date(), // current time
-    //   owner: Meteor.userId(),
-    //   username: Meteor.user().username,
-    //
-    // });
     // Clear form
     target.firstname.value = '';
     target.lastname.value = '';
     target.gender.value = '';
     target.dateOfBirth.value = '';
 
+  },
+  'click .toggle-checked' () {
+    // Set the checked property to the opposite of its current value
+    Meteor.call('eits.setChecked', this._id, !this.checked);
+  },
+  'click .deleteBtn' () {
+    Meteor.call('eits.remove', this._id);
   },
 });

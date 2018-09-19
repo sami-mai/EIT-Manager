@@ -12,8 +12,8 @@ export const EITs = new Mongo.Collection('eits');
 
 if (Meteor.isServer) {
   Meteor.publish("eits", function eitsPublication() {
-    return EITs.find()
-  })
+    return EITs.find();
+  });
 }
 
 Meteor.methods({
@@ -34,5 +34,19 @@ Meteor.methods({
     })
 
   },
+  "eits.remove" (eitId) {
+    check(eitId, String);
+    EITs.remove(eitId);
+  },
+  "eits.update" (eitId, credentials) {
+    check(credentials.firstname, String);
+    check(credentials.lastname, String);
+    check(credentials.gender, String);
+    check(credentials.dateOfBirth, Date);
+
+    EITs.update(eitId, {
+      $set: credentials
+    })
+  }
 
 })
