@@ -24,9 +24,9 @@ Template.eit.events({
     updateEIT(this._id, this);
   },
 
-  'click tr' (event) {
-    updateEIT(this._id, this);
-  }
+  // 'click tr' (event) {
+  //   updateEIT(this._id, this);
+  // }
 });
 
 Template.body.events({
