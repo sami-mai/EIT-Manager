@@ -34,19 +34,28 @@ Meteor.methods({
     })
 
   },
+  'eits.update' (id, firstname, lastname, gender, dateOfBirth) {
+    check(firstname, String);
+    check(lastname, String);
+    check(gender, String);
+    check(dateOfBirth, String);
+
+    EITs.update(id, {
+      $set: {
+        firstname: firstname,
+        lastname: lastname,
+        gender: gender,
+        dateOfBirth: dateOfBirth,
+        createdAt: new Date(),
+        owner: Meteor.userId(),
+        username: Meteor.user().username,
+      }
+    })
+
+  },
   "eits.remove" (eitId) {
     check(eitId, String);
     EITs.remove(eitId);
   },
-  "eits.update" (eitId, credentials) {
-    check(credentials.firstname, String);
-    check(credentials.lastname, String);
-    check(credentials.gender, String);
-    check(credentials.dateOfBirth, Date);
-
-    EITs.update(eitId, {
-      $set: credentials
-    })
-  }
 
 })
